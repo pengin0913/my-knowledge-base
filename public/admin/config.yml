@@ -18,9 +18,10 @@ collections:
     folder: "src/content/docs"          # 對應 Astro 的 content collection 位置
     create: true                        # 允許編輯者在線上新增文章
     slug: "{{topicId}}/{{fields.slug}}" # 存檔路徑規則：主題代碼/子題檔名.md
-    nested:
-      depth: 2                          # 支援多層資料夾結構
     summary: "{{title}} (主題: {{topic}})" # 後台文章清單顯示標題與主題
+    # 核心設定：啟用官方巢狀目錄
+    nested:
+      depth: 3                          # 支援 3 層深度 (根目錄 -> 主題分類 -> 子文章)
     
     # 只要保留這段：未來不論新增第 3 類「影音剪輯」或第 4 類「數學遊戲」，
     # 後台會依據填寫的 topic 自動生成分類折疊群組，一勞永逸！
