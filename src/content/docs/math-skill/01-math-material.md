@@ -1,11 +1,11 @@
 ---
-title: 01.數學科教材教法
-slug: 01.math-material
+title: 01.數學科教材教法22
+slug: 02.math-material
 topic: 數學科教材教法
 topicId: math-skill
-order: 1
-description: test
+order: 0
+description: test2
 ---
-test
+test2
 
-test
+test2222
