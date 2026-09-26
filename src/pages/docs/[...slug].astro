@@ -1,0 +1,63 @@
+---
+import { getCollection } from 'astro:content';
+import DocsLayout from '../../layouts/DocsLayout.astro';
+
+// 1. 生成所有靜態路由路徑
+export async function getStaticPaths() {
+  const allDocs = await getCollection('docs');
+
+  // 將所有文章依主題分組，並依照 order 排序
+  const topicsMap = new Map();
+
+  allDocs.forEach((doc) => {
+    const topicId = doc.data.topicId || 'default';
+    const topicName = doc.data.topic;
+
+    if (!topicsMap.has(topicId)) {
+      topicsMap.set(topicId, {
+        name: topicName,
+        id: topicId,
+        items: [],
+      });
+    }
+
+    topicsMap.get(topicId).items.push({
+      title: doc.data.title,
+      slug: doc.slug,
+      order: doc.data.order ?? 99,
+    });
+  });
+
+  // 各主題內按照 order 由小到大排序
+  const topics = Array.from(topicsMap.values()).map((topic) => ({
+    ...topic,
+    items: topic.items.sort((a, b) => a.order - b.order),
+  }));
+
+  return allDocs.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry, topics },
+  }));
+}
+
+const { entry, topics } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<DocsLayout
+  title={entry.data.title}
+  activeSlug={entry.slug}
+  topics={topics}
+>
+  <header class="article-header">
+    <span class="badge">{entry.data.topic}</span>
+    <h1>{entry.data.title}</h1>
+    {entry.data.description && (
+      <p style="color: #64748b; margin-top: 0.5rem;">{entry.data.description}</p>
+    )}
+  </header>
+
+  <article class="markdown-body">
+    <Content />
+  </article>
+</DocsLayout>
