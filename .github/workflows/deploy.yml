@@ -2,10 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main] # 當 main 分支有新的 commit (含 Decap 發布) 時觸發
-  workflow_dispatch: # 支援在 GitHub 介面手動點擊執行
+    branches: [main]
+  workflow_dispatch:
 
-# 設定權限允許寫入 GitHub Pages
 permissions:
   contents: read
   pages: write
@@ -22,10 +21,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install, build, and upload Astro site
-        uses: withastro/action@v3
+      # 1. 明確安裝支援最新 Astro 的 Node.js 22
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          package-manager: npm
+          node-version: 22
+
+      # 2. 安裝專案相依套件
+      - name: Install dependencies
+        run: npm ci
+
+      # 3. 執行 Astro 建置 (輸出至 dist 目錄)
+      - name: Build Astro site
+        run: npm run build
+
+      # 4. 上傳編譯後的靜態檔案
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
   deploy:
     needs: build
