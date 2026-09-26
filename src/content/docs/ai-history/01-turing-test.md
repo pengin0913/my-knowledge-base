@@ -1,3 +1,11 @@
+---
+title: 01. 圖靈測試與早期符號主義
+slug: 01-turing-test.md
+topic: AI發展史
+topicId: ai-history
+order: 1
+description: 探討人工智慧起點：圖靈測試與符號邏輯推論。
+---
 \---
 
 title: "01. 圖靈測試與早期符號主義"
