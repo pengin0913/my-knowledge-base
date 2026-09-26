@@ -5,14 +5,7 @@ const allDocs = await getCollection('docs');
 // 依 order 排序出第一篇文章
 const sortedDocs = allDocs.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 const firstDoc = sortedDocs[0];
-
-// 取得 astro.config.mjs 設定的 base 路徑 (例如 /my-knowledge-base/)
-const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
-
-// 自動加上 base 前綴
-const targetUrl = firstDoc 
-  ? `${base}/docs/${firstDoc.slug}/` 
-  : `${base}/admin/`;
+const targetUrl = firstDoc ? `/docs/${firstDoc.slug}/` : '/admin/';
 ---
 
 <!doctype html>
