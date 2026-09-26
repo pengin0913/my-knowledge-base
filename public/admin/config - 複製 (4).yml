@@ -1,0 +1,57 @@
+backend:
+  name: github
+  repo: pengin0913/my-knowledge-base
+  branch: main
+  base_url: https://my-knowledge-base.pengin0913.workers.dev
+  auth_endpoint: auth
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "docs"
+    label: "知識庫文章"
+    folder: "src/content/docs"
+    create: true
+    # 存檔規則：自動以子資料夾建立 (主題資料夾/子文章)
+    slug: "{{topicId}}/{{fields.slug}}"
+    summary: "{{title}}"
+    
+    # 核心設定：啟用官方巢狀目錄
+    nested:
+      depth: 3 # 支援 3 層深度 (根目錄 -> 主題分類 -> 子文章)
+
+    fields:
+      - label: "文章標題"
+        name: "title"
+        widget: "string"
+
+      - label: "文章檔名代碼 (Slug)"
+        name: "slug"
+        widget: "string"
+        hint: "例如：01-turing-test (作為 md 檔案名稱)"
+
+      - label: "所屬主題分類名稱"
+        name: "topic"
+        widget: "string"
+        hint: "前台網頁顯示的主題中文名，例如：AI發展史、數學科教材教法"
+
+      - label: "主題資料夾代碼 (Topic ID)"
+        name: "topicId"
+        widget: "string"
+        hint: "對應資料夾名稱，例如：ai-history、math-teaching (不可有中文與空格)"
+
+      - label: "選單排序"
+        name: "order"
+        widget: "number"
+        value_type: "int"
+        default: 1
+
+      - label: "文章摘要"
+        name: "description"
+        widget: "text"
+        required: false
+
+      - label: "文章內容"
+        name: "body"
+        widget: "markdown"
