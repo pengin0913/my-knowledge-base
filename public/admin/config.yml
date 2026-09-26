@@ -24,9 +24,9 @@ collections:
     
     # 只要保留這段：未來不論新增第 3 類「影音剪輯」或第 4 類「數學遊戲」，
     # 後台會依據填寫的 topic 自動生成分類折疊群組，一勞永逸！
-    view_groups:
-      - label: "主題分類"
-        field: "topic"
+    #view_groups:
+    #  - label: "主題分類"
+    #    field: "topic"
 
     fields:
       - label: "文章標題"
