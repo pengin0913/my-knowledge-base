@@ -5,7 +5,7 @@ const allDocs = await getCollection('docs');
 // 依 order 排序出第一篇文章
 const sortedDocs = allDocs.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 const firstDoc = sortedDocs[0];
-const targetUrl = firstDoc ? `/docs/${firstDoc.slug}/` : '/admin/';
+const targetUrl = firstDoc ? `/docs/${firstDoc.slug}/` : `/admin/`;
 ---
 
 <!doctype html>

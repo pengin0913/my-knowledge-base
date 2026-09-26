@@ -136,8 +136,8 @@ const { title, activeSlug, topics } = Astro.props;
         <ul class="nav-list">
           {topic.items.map((item) => (
             <li class="nav-item">
-              <a
-                href={`${base}/docs/${item.slug}/`}
+              <a 
+                href={`/docs/${item.slug}/`}
                 class={activeSlug === item.slug ? "active" : ""}
               >
                 {item.title}
