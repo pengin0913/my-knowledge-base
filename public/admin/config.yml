@@ -13,13 +13,13 @@ collections:
     label: "知識庫文章"
     folder: "src/content/docs"
     create: true
-    # 存檔規則：自動以子資料夾建立 (主題資料夾/子文章)
+    # 存檔規則：主題資料夾/子文章
     slug: "{{topicId}}/{{fields.slug}}"
     summary: "{{title}}"
     
-    # 核心設定：啟用官方巢狀目錄
+    # 啟用 3 層資料夾巢狀結構
     nested:
-      depth: 3 # 支援 3 層深度 (根目錄 -> 主題分類 -> 子文章)
+      depth: 3
 
     fields:
       - label: "文章標題"
@@ -29,17 +29,17 @@ collections:
       - label: "文章檔名代碼 (Slug)"
         name: "slug"
         widget: "string"
-        hint: "例如：01-turing-test (作為 md 檔案名稱)"
+        hint: "例如：01-turing-test"
 
       - label: "所屬主題分類名稱"
         name: "topic"
         widget: "string"
-        hint: "前台網頁顯示的主題中文名，例如：AI發展史、數學科教材教法"
+        hint: "例如：AI發展史、數學科教材教法"
 
       - label: "主題資料夾代碼 (Topic ID)"
         name: "topicId"
         widget: "string"
-        hint: "對應資料夾名稱，例如：ai-history、math-teaching (不可有中文與空格)"
+        hint: "例如：ai-history、math-teaching"
 
       - label: "選單排序"
         name: "order"
